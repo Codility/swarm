@@ -5,7 +5,8 @@ export default class Tile extends React.Component {
     super(props);
   }
   render() {
-    return <div/>;
+    let classes = ['c-tile', 'mod-' + this.props.color, 'mod-' + this.constructor.name.toLocaleLowerCase()];
+    return <div className={classes.join(' ')}>{this.constructor.name}</div>;
   }
 }
 

@@ -2,3 +2,17 @@
 body {
 
 }
+
+.c-tile {
+    width: 90px;
+    height: 90px;
+    border: 1px solid grey;
+    float: left;
+    text-align: center;
+}
+
+.c-tile.mod-black {
+    color: white;
+    background: black;
+}
+
