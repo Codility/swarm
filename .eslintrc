@@ -1,6 +1,28 @@
 {
   "ecmaFeatures": {
+    // All that Babel supports minus stuff that doesn't make sense for us
     "jsx": true,
+    "arrowFunctions": true,
+    "binaryLiterals": true,
+    "blockBindings": true,
+    "classes": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "forOf": false, // depends on Symbol
+    "generators": false,  // depends on Symbol
+    "objectLiteralComputedProperties": true,
+    "objectLiteralDuplicateProperties": true,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "regexUFlag": true,
+    "regexYFlag": true,
+    "restParams": true,
+    "spread": true,
+    "superInFunctions": true,
+    "templateStrings": true,
+    "unicodeCodePointEscapes": true,
+    "globalReturn": false,
+    "octalLiterals": false,
     "modules": true
   },
   "env": {
@@ -11,6 +33,11 @@
   "rules": {
     "quotes": [2, "single"],
     "strict": [2, "never"],
+    "indent": [2, 2, {"VariableDeclarator": 2}],
+    "no-unused-vars": [2, {"vars": "local", "args": "none"}],
+    "no-trailing-spaces": [2],
+    "comma-dangle": [0], // neither require nor disallow
+    "semi": [2, "always"],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2
