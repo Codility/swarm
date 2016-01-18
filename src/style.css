@@ -64,13 +64,13 @@ body {
   /* top approx. 50% of .hexagon height + spacing */
   top: 59px;
 }
-.hexagon:hover {
+.hexagon.mod-full:hover {
   background-color: hsla(60, 75%, 75%, 1.0);
   color: black;
   cursor: pointer;
   z-index: 105;
 }
-.hexagon:active {
+.hexagon.mod-full:active, .hexagon.mod-isover {
   background-color: hsla(60, 75%, 50%, 1.0);
   z-index: 110;
 }

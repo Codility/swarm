@@ -17,7 +17,7 @@ function collect(connect, monitor) {
 
 class Tile extends React.Component {
   render() {
-    let classes = ['c-tile', 'mod-' + this.props.color, 'mod-' + this.props.type, 'hexagon'];
+    let classes = ['c-tile', 'mod-full', 'mod-' + this.props.color, 'mod-' + this.props.type, 'hexagon'];
 
     if (this.props.isDragging) {
       classes.push('mod-dragging');
