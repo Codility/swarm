@@ -35,18 +35,24 @@ export default class Game {
 
   static getState() {
     let tiles = [];
-    let unusedTiles = [];
+    let unusedWhite = [];
+    let unusedBlack = [];
     Object.keys(Game.tiles).forEach((id) => {
       let tile = Game.tiles[id];
       if (typeof tile.x !== 'number' || typeof tile.x !== 'number') {
-        unusedTiles.push(tile);
+        if (tile.color === 'white') {
+          unusedWhite.push(tile);
+        } else {
+          unusedBlack.push(tile);
+        }
       } else {
         tiles.push(tile);
       }
     });
     return {
       tiles: tiles,
-      unusedTiles: unusedTiles
+      unusedWhite: unusedWhite,
+      unusedBlack: unusedBlack
     };
   }
 

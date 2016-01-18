@@ -19,7 +19,8 @@ class App extends Component {
     return (
       <div>
         <h1>Swarm</h1>
-        <HexLayout tiles={this.state.unusedTiles}/>
+        <HexLayout tiles={this.state.unusedWhite}/>
+        <HexLayout tiles={this.state.unusedBlack}/>
         <Board tiles={this.state.tiles} minRows={8}/>
       </div>
     );

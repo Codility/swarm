@@ -28,4 +28,4 @@ export default class Board extends HexLayout {
   }
 }
 
-Board.SIZE = 8;
+Board.SIZE = 12;
