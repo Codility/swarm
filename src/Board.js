@@ -1,6 +1,6 @@
 import React from 'react';
 import Tile from './Tile';
-import EmptyTile from './EmptyTile'
+import EmptyTile from './EmptyTile';
 
 export default class Board extends React.Component {
   render() {
