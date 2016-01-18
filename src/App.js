@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Tile from './Tile';
+import Board from './Board';
 
 export default class App extends Component {
   static generateTiles() {
@@ -43,22 +43,12 @@ export default class App extends Component {
   }
 
   render() {
-    let unusedComponents = this.state.unused.map((tile) => {
-      return (<Tile color={tile.color} type={tile.type} key={tile.color + tile.type + tile.id}/>);
-    });
-    let usedComponents = this.state.used.map((tile) => {
-      return (<Tile color={tile.color} type={tile.type} key={tile.color + tile.type + tile.id}/>);
-    });
     return (
       <div>
-        <h1>Hello, world.</h1>
-        <div className="c-board">
-          {unusedComponents}
-        </div>
+        <h1>Swarm</h1>
+        <Board tiles={this.state.unused}/>
         <button onClick={this.addFirst.bind(this)}>Add First</button>
-        <div className="c-board">
-          {usedComponents}
-        </div>
+        <Board tiles={this.state.used}/>
       </div>
     );
   }

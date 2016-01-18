@@ -85,11 +85,15 @@ body {
   z-index: 100;
 }
 .c-board {
-  /* inline-block whitespace fix */
-  font-size: 0;
   background-color: darkgray;
   padding: 30px 40px 80px 40px;
 }
+
+.c-board-row {
+  /* inline-block whitespace fix */
+  font-size: 0;
+}
+
 .honeycomb {
   margin: 0 auto;
   text-align: center;
