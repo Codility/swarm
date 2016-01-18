@@ -29,11 +29,11 @@ export default class Game {
     ];
 
     if (x % 2) {
-      positions.push({x: x + 1, y: y - 1});
-      positions.push({x: x - 1, y: y - 1});
-    } else {
       positions.push({x: x + 1, y: y + 1});
       positions.push({x: x - 1, y: y + 1});
+    } else {
+      positions.push({x: x + 1, y: y - 1});
+      positions.push({x: x - 1, y: y - 1});
     }
     return positions;
   }
@@ -46,7 +46,7 @@ export default class Game {
     if (Game.moveCount === 0) {
       return true;
     }
-    let r = Game.listAdjancentPositions(x, y).some(pos => {
+    return Game.listAdjancentPositions(x, y).some(pos => {
       return Object.keys(Game.tiles).some(id => {
         let tile = Game.tiles[id];
         if (tile.x === pos.x && tile.y === pos.y) {
@@ -54,7 +54,6 @@ export default class Game {
         }
       });
     });
-    return r;
   }
 
   static moveTile(id, x, y) {

@@ -7,8 +7,10 @@ import Game from './Game';
 class EmptyTile extends React.Component {
   render() {
     let classes = ['c-tile', 'mod-empty', 'hexagon'];
-    if (this.props.isOver) {
+    if (this.props.isOver && this.props.canDrop) {
       classes.push('mod-isover');
+    } else if (this.props.canDrop) {
+      classes.push('mod-allowed');
     }
     return this.props.connectDropTarget(
       <div className={classes.join(' ')}>
@@ -30,7 +32,8 @@ const tileTarget = {
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
   };
 }
 
@@ -39,6 +42,7 @@ export default DropTarget(ITEM_TYPES.TILE, tileTarget, collect)(EmptyTile);
 EmptyTile.propTypes = {
   connectDropTarget: React.PropTypes.func.isRequired,
   isOver: React.PropTypes.bool.isRequired,
+  canDrop: React.PropTypes.bool.isRequired,
   x: React.PropTypes.number.isRequired,
   y: React.PropTypes.number.isRequired
 };

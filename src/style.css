@@ -85,6 +85,11 @@ h2 {
   background-color: hsla(60, 75%, 50%, 1.0);
   z-index: 110;
 }
+
+.hexagon.mod-allowed {
+  background-color: #ddd;
+}
+
 .hexanone {
   position: relative;
   display: inline-block;

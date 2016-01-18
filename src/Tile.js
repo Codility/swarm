@@ -17,13 +17,17 @@ const tileSource = {
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
+    canDrag: monitor.canDrag()
   };
 }
 
 class Tile extends React.Component {
   render() {
-    let classes = ['c-tile', 'mod-full', 'mod-' + this.props.color, 'mod-' + this.props.type, 'hexagon'];
+    let classes = ['c-tile', 'mod-' + this.props.color, 'mod-' + this.props.type, 'hexagon'];
+    if (this.props.canDrag) {
+      classes.push('mod-full');
+    }
 
     if (this.props.isDragging) {
       classes.push('mod-dragging');
@@ -42,7 +46,8 @@ Tile.propTypes = {
   type: React.PropTypes.string.isRequired,
   id: React.PropTypes.string.isRequired,
   connectDragSource: React.PropTypes.func.isRequired,
-  isDragging: React.PropTypes.bool.isRequired
+  isDragging: React.PropTypes.bool.isRequired,
+  canDrag: React.PropTypes.bool.isRequired
 };
 
 export default DragSource(ITEM_TYPES.TILE, tileSource, collect)(Tile);
