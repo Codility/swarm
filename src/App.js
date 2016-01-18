@@ -48,7 +48,7 @@ export default class App extends Component {
         <h1>Swarm</h1>
         <Board tiles={this.state.unused}/>
         <button onClick={this.addFirst.bind(this)}>Add First</button>
-        <Board tiles={this.state.used}/>
+        <Board tiles={this.state.used} minRows={8}/>
       </div>
     );
   }
