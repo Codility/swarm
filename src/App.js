@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HexLayout from './HexLayout';
 import Board from './Board';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -18,7 +19,7 @@ class App extends Component {
     return (
       <div>
         <h1>Swarm</h1>
-        <Board tiles={this.state.unusedTiles}/>
+        <HexLayout tiles={this.state.unusedTiles}/>
         <Board tiles={this.state.tiles} minRows={8}/>
       </div>
     );

@@ -23,6 +23,8 @@ body {
 /* Based on http://codepen.io/gpyne/pen/iElhp */
 
 body {
+  background-color: darkgray;
+  font-family: Arial, sans-serif;
   color: hsl(0, 0%, 10%);
   max-width: 920px;
   margin: 0 auto;
@@ -30,6 +32,12 @@ body {
   bottom: 0;
   top: 0;
 }
+
+h1 {
+  color: ivory;
+  border-bottom: 2px solid #444400;
+}
+
 .hexagon {
   position: relative;
   display: inline-block;
@@ -93,7 +101,6 @@ body {
   font-size: 1rem;
   line-height: 1.2;
   z-index: 100;
-  font-family: Arial, sans-serif;
 }
 .c-board {
   background-color: darkgray;
