@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Board from './Board';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { COLORS, TYPES } from './Constants'
 
-export default class App extends Component {
+class App extends Component {
   static generateTiles() {
     let tiles = [];
-    App.COLORS.forEach((color) => {
-      Object.keys(App.TYPES).forEach((type) => {
-        let count = App.TYPES[type];
+    COLORS.forEach((color) => {
+      Object.keys(TYPES).forEach((type) => {
+        let count = TYPES[type];
         for (let i=0; i<count; i+=1) {
           tiles.push({
             color: color,
@@ -25,7 +28,7 @@ export default class App extends Component {
     this.state = {
       used: [],
       unused: App.generateTiles(),
-      turn: App.COLORS[0]
+      turn: COLORS[0]
     };
   }
 
@@ -54,11 +57,4 @@ export default class App extends Component {
   }
 }
 
-App.COLORS = ['white', 'black'];
-App.TYPES = {
-  ant: 3,
-  grasshopper: 3,
-  beetle: 2,
-  spider: 2,
-  bee: 1
-};
+export default DragDropContext(HTML5Backend)(App);

@@ -11,6 +11,15 @@ body {
   background: black;
 }
 
+.c-tile.mod-empty {
+  color: white;
+  background: #ccc;
+}
+
+.c-tile.mod-dragging {
+  opacity: 0.5;
+}
+
 /* Based on http://codepen.io/gpyne/pen/iElhp */
 
 body {
@@ -80,9 +89,10 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 140%;
-  font-size: 1.4rem;
+  font-size: 1rem;
   line-height: 1.2;
   z-index: 100;
+  font-family: Arial, sans-serif;
 }
 .c-board {
   background-color: darkgray;
