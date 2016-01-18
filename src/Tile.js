@@ -1,8 +1,12 @@
 import React from 'react';
 import { DragSource } from 'react-dnd';
 import { ITEM_TYPES } from './Constants';
+import Game from './Game';
 
 const tileSource = {
+  canDrag(props) {
+    return Game.canDragTile(props.id);
+  },
   beginDrag(props) {
     return {
       id: props.id

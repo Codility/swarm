@@ -37,6 +37,9 @@ h1 {
   color: ivory;
   border-bottom: 2px solid #444400;
 }
+h2 {
+  color: ivory;
+}
 
 .hexagon {
   position: relative;

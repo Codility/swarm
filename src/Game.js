@@ -20,9 +20,14 @@ export default class Game {
     return tiles;
   }
 
+  static canDragTile(id) {
+    return Game.tiles[id].color === Game.turn;
+  }
+
   static moveTile(id, x, y) {
     Game.tiles[id].x = x;
     Game.tiles[id].y = y;
+    Game.turn = Game.turn === 'white' ? 'black' : 'white';
     Game.publish();
   }
 
@@ -52,7 +57,8 @@ export default class Game {
     return {
       tiles: tiles,
       unusedWhite: unusedWhite,
-      unusedBlack: unusedBlack
+      unusedBlack: unusedBlack,
+      turn: Game.turn
     };
   }
 
@@ -66,4 +72,5 @@ export default class Game {
 
 Game.tiles = Game.generateTiles();
 Game.listener = null;
+Game.turn = 'white';
 Game.publish();
