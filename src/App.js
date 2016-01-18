@@ -52,11 +52,11 @@ export default class App extends Component {
     return (
       <div>
         <h1>Hello, world.</h1>
-        <div>
+        <div className="c-board">
           {unusedComponents}
         </div>
         <button onClick={this.addFirst.bind(this)}>Add First</button>
-        <div>
+        <div className="c-board">
           {usedComponents}
         </div>
       </div>
