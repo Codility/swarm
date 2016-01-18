@@ -20,8 +20,41 @@ export default class Game {
     return tiles;
   }
 
+  static listAdjancentPositions(x, y) {
+    let positions = [
+      {x: x + 1, y: y},
+      {x: x - 1, y: y},
+      {x: x, y: y + 1},
+      {x: x, y: y - 1}
+    ];
+
+    if (x % 2) {
+      positions.push({x: x + 1, y: y - 1});
+      positions.push({x: x - 1, y: y - 1});
+    } else {
+      positions.push({x: x + 1, y: y + 1});
+      positions.push({x: x - 1, y: y + 1});
+    }
+    return positions;
+  }
+
   static canDragTile(id) {
     return Game.tiles[id].color === Game.turn;
+  }
+
+  static canDropTile(id, x, y) {
+    if (Game.moveCount === 0) {
+      return true;
+    }
+    let r = Game.listAdjancentPositions(x, y).some(pos => {
+      return Object.keys(Game.tiles).some(id => {
+        let tile = Game.tiles[id];
+        if (tile.x === pos.x && tile.y === pos.y) {
+          return true;
+        }
+      });
+    });
+    return r;
   }
 
   static moveTile(id, x, y) {

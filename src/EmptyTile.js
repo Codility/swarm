@@ -19,6 +19,9 @@ class EmptyTile extends React.Component {
 }
 
 const tileTarget = {
+  canDrop(props, monitor) {
+    return Game.canDropTile(monitor.getItem().id, props.x, props.y);
+  },
   drop(props, monitor) {
     Game.moveTile(monitor.getItem().id, props.x, props.y);
   }
