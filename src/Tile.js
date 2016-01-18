@@ -4,7 +4,9 @@ import { ITEM_TYPES } from './Constants';
 
 const tileSource = {
   beginDrag(props) {
-    return {};
+    return {
+      id: props.id
+    };
   }
 };
 
@@ -34,6 +36,7 @@ class Tile extends React.Component {
 Tile.propTypes = {
   color: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired,
+  id: React.PropTypes.string.isRequired,
   connectDragSource: React.PropTypes.func.isRequired,
   isDragging: React.PropTypes.bool.isRequired
 };

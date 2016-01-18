@@ -2,21 +2,28 @@ import { COLORS, TYPES } from './Constants';
 
 export default class Game {
   static generateTiles() {
-    let tiles = [];
+    let tiles = {};
     COLORS.forEach((color) => {
       Object.keys(TYPES).forEach((type) => {
         let count = TYPES[type];
         for (let i=0; i<count; i+=1) {
-          tiles.push({
+          let id = color + '-' + type + '-' + i;
+          tiles[id] = ({
             color: color,
             type: type,
-            id: i
+            id: id
           });
         }
       });
     });
 
     return tiles;
+  }
+
+  static moveTile(id, x, y) {
+    Game.tiles[id].x = x;
+    Game.tiles[id].y = y;
+    Game.publish();
   }
 
   static subscribe(fn) {
@@ -27,8 +34,19 @@ export default class Game {
   }
 
   static getState() {
+    let tiles = [];
+    let unusedTiles = [];
+    Object.keys(Game.tiles).forEach((id) => {
+      let tile = Game.tiles[id];
+      if (typeof tile.x !== 'number' || typeof tile.x !== 'number') {
+        unusedTiles.push(tile);
+      } else {
+        tiles.push(tile);
+      }
+    });
     return {
-      tiles: Game.tiles
+      tiles: tiles,
+      unusedTiles: unusedTiles
     };
   }
 

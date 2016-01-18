@@ -18,8 +18,8 @@ class App extends Component {
     return (
       <div>
         <h1>Swarm</h1>
-        <Board tiles={this.state.tiles}/>
-        <Board tiles={[]} minRows={8}/>
+        <Board tiles={this.state.unusedTiles}/>
+        <Board tiles={this.state.tiles} minRows={8}/>
       </div>
     );
   }
