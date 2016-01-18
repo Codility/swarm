@@ -28,6 +28,7 @@ export default class Game {
     Game.tiles[id].x = x;
     Game.tiles[id].y = y;
     Game.turn = Game.turn === 'white' ? 'black' : 'white';
+    Game.moveCount += 1;
     Game.publish();
   }
 
@@ -58,7 +59,8 @@ export default class Game {
       tiles: tiles,
       unusedWhite: unusedWhite,
       unusedBlack: unusedBlack,
-      turn: Game.turn
+      turn: Game.turn,
+      moveCount: Game.moveCount
     };
   }
 
@@ -73,4 +75,5 @@ export default class Game {
 Game.tiles = Game.generateTiles();
 Game.listener = null;
 Game.turn = 'white';
+Game.moveCount = 0;
 Game.publish();

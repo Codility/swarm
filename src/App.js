@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <div>
         <h1>Swarm</h1>
-        <h2>Turn: {this.state.turn}</h2>
+        <h2>Turn: {this.state.turn}, moves done: {this.state.moveCount}</h2>
         <HexLayout tiles={this.state.unusedWhite}/>
         <HexLayout tiles={this.state.unusedBlack}/>
         <Board tiles={this.state.tiles} minRows={8}/>
