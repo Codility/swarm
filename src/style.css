@@ -21,6 +21,38 @@ body {
   opacity: 0.5;
 }
 
+.c-tile.mod-black.mod-bee {
+  color: #FFF9AF;
+}
+
+.c-tile.mod-white.mod-bee {
+  background: #FFF9AF;
+}
+
+.c-tile.mod-black.mod-grasshopper {
+  color: #C1FEFC;
+}
+
+.c-tile.mod-white.mod-grasshopper {
+  background: #C1FEFC;
+}
+
+.c-tile.mod-black.mod-spider {
+  color: #FCD3E4;
+}
+
+.c-tile.mod-white.mod-spider {
+  background: #FCD3E4;
+}
+
+.c-tile.mod-black.mod-ant {
+  color: #D1FFBD;
+}
+
+.c-tile.mod-white.mod-ant {
+  background: #D1FFBD;
+}
+
 /* Based on http://codepen.io/gpyne/pen/iElhp */
 
 body {
