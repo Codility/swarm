@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { COLORS, TYPES } from './Constants';
 import { actionTypes } from './actions';
+import { generateId } from './utils'
 
 function generateTiles() {
   let tiles = {};
@@ -8,7 +9,7 @@ function generateTiles() {
     Object.keys(TYPES).forEach((type) => {
       let count = TYPES[type];
       for (let i=0; i<count; i+=1) {
-        let id = color + '-' + type + '-' + i;
+        let id = generateId(color, type , i);
         tiles[id] = ({
           color: color,
           type: type,

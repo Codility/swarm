@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { generateId } from './utils';
 
 const getTiles = (state) => state.tiles;
 const getTile = (state, props) => state.tiles[props.id];
@@ -57,8 +58,15 @@ export const canDropTile = createSelector(
 );
 
 export const canDragTile = createSelector(
-  [getTile, getTurn],
-  (tile, turn) => tile.color === turn
+  [getTile, getTurn, getMoveCount, getTiles],
+  (tile, turn, moveCount, tiles) => {
+    if (tile.color !== turn)
+      return false;
+    if ((moveCount >= 4) && (!tileOnBoard(tiles[generateId(turn, 'bee', 0)])) && (tile.type !== 'bee')) {
+      return false;
+    }
+    return true;
+  }
 );
 
 export const getUsedTiles = createSelector(
