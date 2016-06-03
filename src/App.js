@@ -35,3 +35,19 @@ function mapStateToProps(state) {
 const dispatchToProps = {};
 
 export default connect(mapStateToProps, dispatchToProps)(DragDropContext(HTML5Backend)(App));
+
+/* TODO rules to implement
+*
+* bee movement
+* grasshopper movement
+* spider movement
+* don't squeeze through gaps
+* no legal move -> skip turn
+*
+* one hive
+*
+* win/draw condition
+*
+* add beetle
+*
+* */
