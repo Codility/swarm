@@ -38,7 +38,6 @@ export default connect(mapStateToProps, dispatchToProps)(DragDropContext(HTML5Ba
 
 /* TODO rules to implement
 *
-* bee movement
 * grasshopper movement
 * spider movement
 * don't squeeze through gaps
