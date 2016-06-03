@@ -91,9 +91,13 @@ export const canDropTile = createSelector(
     }
     if (draggedTile.type === 'bee') {
       return draggedIsNeighbor;
+    } else if (draggedTile.type === 'ant') {
+      return true;
+    } else if (draggedTile.type === 'grasshopper') {
+      return true; // Tile movement rules go here
+    } else if (draggedTile.type === 'spider') {
+      return true; // Tile movement rules go here
     }
-    // Tile movement rules go here
-    return false;
   }
 );
 
