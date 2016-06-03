@@ -8,21 +8,9 @@ const getDraggedTileId = (state) => state.draggedTileId;
 const getX = (state, props) => props.x;
 const getY = (state, props) => props.y;
 
-const getUnusedColorTiles = (color) => createSelector(
-  [getTiles],
-  (tiles) => {
-    let colorTiles = [];
-    Object.keys(tiles).forEach((id) => {
-      let tile = tiles[id];
-      if (typeof tile.x !== 'number' || typeof tile.y !== 'number') {
-        if (tile.color === color) {
-          colorTiles.push(tile);
-        }
-      }
-    });
-    return colorTiles;
-  }
-);
+function tileOnBoard(tile) {
+  return (typeof tile.x === 'number' && typeof tile.y === 'number');
+}
 
 function listAdjancentPositions(x, y) {
   let positions = [
@@ -43,15 +31,25 @@ function listAdjancentPositions(x, y) {
 }
 
 export const canDropTile = createSelector(
-  [getTiles, getMoveCount, getDraggedTileId, getX, getY],
-  (tiles, moveCount, draggedTileId, x, y) => {
+  [getTiles, getTurn, getMoveCount, getDraggedTileId, getX, getY],
+  (tiles, turn, moveCount, draggedTileId, x, y) => {
+    const draggedTile = tiles[draggedTileId];
     if (moveCount === 0)
       return true;
     return listAdjancentPositions(x, y).some(pos => {
       return Object.keys(tiles).some(id => {
         let tile = tiles[id];
         if (tile.x === pos.x && tile.y === pos.y) {
-          return true;
+          if (!draggedTile) {
+            return false;
+          }
+          if (moveCount === 1) {
+            return true;
+          }
+          if (!tileOnBoard(draggedTile)) {
+            return tile.color == turn;
+          }
+          return true; // Tile movement rules go here
         }
       });
     });
@@ -69,11 +67,27 @@ export const getUsedTiles = createSelector(
     let usedTiles = [];
     Object.keys(tiles).forEach((id) => {
       let tile = tiles[id];
-      if (typeof tile.x === 'number' && typeof tile.y === 'number') {
+      if (tileOnBoard(tile)) {
         usedTiles.push(tile);
       }
     });
     return usedTiles;
+  }
+);
+
+const getUnusedColorTiles = (color) => createSelector(
+  [getTiles],
+  (tiles) => {
+    let colorTiles = [];
+    Object.keys(tiles).forEach((id) => {
+      let tile = tiles[id];
+      if (!tileOnBoard(tile)) {
+        if (tile.color === color) {
+          colorTiles.push(tile);
+        }
+      }
+    });
+    return colorTiles;
   }
 );
 
