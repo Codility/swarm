@@ -1,16 +1,22 @@
 import React from 'react';
 import { DragSource } from 'react-dnd';
 import { ITEM_TYPES } from './Constants';
-import Game from './Game';
+import { connect } from 'react-redux';
+import { canDragTile } from './selectors';
+import { actions } from './actions';
 
 const tileSource = {
   canDrag(props) {
-    return Game.canDragTile(props.id);
+    return props.canDragTile
   },
   beginDrag(props) {
+    props.beginDrag(props.id);
     return {
       id: props.id
     };
+  },
+  endDrag(props) {
+    props.endDrag();
   }
 };
 
@@ -47,7 +53,19 @@ Tile.propTypes = {
   id: React.PropTypes.string.isRequired,
   connectDragSource: React.PropTypes.func.isRequired,
   isDragging: React.PropTypes.bool.isRequired,
-  canDrag: React.PropTypes.bool.isRequired
+  canDrag: React.PropTypes.bool.isRequired,
+  canDragTile: React.PropTypes.bool.isRequired
 };
 
-export default DragSource(ITEM_TYPES.TILE, tileSource, collect)(Tile);
+function mapStateToProps(state, props) {
+  return {
+    canDragTile: canDragTile(state, props)
+  }
+}
+
+const dispatchToProps = {
+  beginDrag: actions.beginDrag,
+  endDrag: actions.endDrag
+};
+
+export default connect(mapStateToProps, dispatchToProps)(DragSource(ITEM_TYPES.TILE, tileSource, collect)(Tile));

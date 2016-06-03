@@ -48,6 +48,7 @@
     "react-dnd-html5-backend": "^2.0.2",
     "react-dom": "^0.14.0",
     "react-redux": "^4.4.5",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "reselect": "^2.5.1"
   }
 }

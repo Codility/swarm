@@ -7,7 +7,7 @@ import swarmReducer from './reducers';
 
 require('./style.css');
 
-let store = createStore(swarmReducer);
+let store = createStore(swarmReducer, undefined, window.devToolsExtension && window.devToolsExtension());
 
 ReactDOM.render(
   <Provider store={store}>

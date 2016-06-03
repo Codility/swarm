@@ -1,15 +1,17 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
+import { connect } from 'react-redux';
 import { ITEM_TYPES } from './Constants';
-import Game from './Game';
+import { canDropTile } from './selectors';
+import { actions } from './actions';
 
 
 class EmptyTile extends React.Component {
   render() {
     let classes = ['c-tile', 'mod-empty', 'hexagon'];
-    if (this.props.isOver && this.props.canDrop) {
+    if (this.props.isOver && this.props.canDropTile) {
       classes.push('mod-isover');
-    } else if (this.props.canDrop) {
+    } else if (this.props.canDropTile) {
       classes.push('mod-allowed');
     }
     return this.props.connectDropTarget(
@@ -21,11 +23,11 @@ class EmptyTile extends React.Component {
 }
 
 const tileTarget = {
-  canDrop(props, monitor) {
-    return Game.canDropTile(monitor.getItem().id, props.x, props.y);
+  canDrop(props) {
+    return props.canDropTile;
   },
   drop(props, monitor) {
-    Game.moveTile(monitor.getItem().id, props.x, props.y);
+    props.moveTile(monitor.getItem().id, props.x, props.y);
   }
 };
 
@@ -37,7 +39,17 @@ function collect(connect, monitor) {
   };
 }
 
-export default DropTarget(ITEM_TYPES.TILE, tileTarget, collect)(EmptyTile);
+function mapStateToProps(state, props) {
+  return {
+    canDropTile: canDropTile(state, props)
+  }
+}
+
+const dispatchToProps = {
+  moveTile: actions.moveTile
+};
+
+export default connect(mapStateToProps, dispatchToProps)(DropTarget(ITEM_TYPES.TILE, tileTarget, collect)(EmptyTile));
 
 EmptyTile.propTypes = {
   connectDropTarget: React.PropTypes.func.isRequired,
