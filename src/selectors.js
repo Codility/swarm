@@ -35,25 +35,39 @@ export const canDropTile = createSelector(
   [getTiles, getTurn, getMoveCount, getDraggedTileId, getX, getY],
   (tiles, turn, moveCount, draggedTileId, x, y) => {
     const draggedTile = tiles[draggedTileId];
-    if (moveCount === 0)
+    if (!draggedTile) {
+      return false;
+    }
+    if (moveCount === 0) {
       return true;
-    return listAdjancentPositions(x, y).some(pos => {
-      return Object.keys(tiles).some(id => {
-        let tile = tiles[id];
-        if (tile.x === pos.x && tile.y === pos.y) {
-          if (!draggedTile) {
-            return false;
-          }
-          if (moveCount === 1) {
-            return true;
-          }
-          if (!tileOnBoard(draggedTile)) {
-            return tile.color == turn;
-          }
-          return true; // Tile movement rules go here
-        }
-      });
+    }
+    let hasNeighbor = false;
+    let hasColorNeighbor = false;
+    listAdjancentPositions(x, y).forEach(pos => {
+      const neighborTile = tiles[Object.keys(tiles).find(id => {
+        return tiles[id] && (tiles[id].x === pos.x && tiles[id].y === pos.y)
+      })];
+      if (!neighborTile) {
+        return;
+      }
+      hasNeighbor = true;
+
+      if (neighborTile.color == turn) {
+        hasColorNeighbor = true;
+      }
+      return true;
     });
+    if (!hasNeighbor) {
+      return false;
+    }
+    if (moveCount === 1) {
+      return true;
+    }
+    if (!tileOnBoard(draggedTile)) {
+      return hasColorNeighbor;
+    }
+    // Tile movement rules go here
+    return false;
   }
 );
 
