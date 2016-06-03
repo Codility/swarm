@@ -28,6 +28,16 @@ function collect(connect, monitor) {
   };
 }
 
+const iconMapping = {
+  ant: 'j',
+  grasshopper: 'i',
+  beetle: 'a',
+  spider: 'k',
+  bee: 'g',
+  mosquito: 'b',
+  ladybug: 'd'
+};
+
 class Tile extends React.Component {
   render() {
     let classes = ['c-tile', 'mod-' + this.props.color, 'mod-' + this.props.type, 'hexagon'];
@@ -41,7 +51,7 @@ class Tile extends React.Component {
 
     return this.props.connectDragSource(
       <div className={classes.join(' ')}>
-        <div className="hexagontent">{this.props.type}</div>
+        <div className="hexagontent">{iconMapping[this.props.type]}</div>
       </div>
     );
   }

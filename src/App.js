@@ -16,6 +16,7 @@ class App extends Component {
         <HexLayout tiles={this.props.unusedWhite}/>
         <HexLayout tiles={this.props.unusedBlack}/>
         <Board tiles={this.props.tiles} minRows={8}/>
+        <h4> Icons by <a href="https://thenounproject.com/WSD/">Anton Gajdosik</a></h4>
       </div>
     );
   }

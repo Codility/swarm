@@ -4,6 +4,7 @@ body {
 }
 
 .c-tile {
+  font-family: fontello;
 }
 
 .c-tile.mod-black {
@@ -102,11 +103,11 @@ h2 {
 }
 .hexagontent {
   position: absolute;
-  top: 50%;
+  top: 56%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 140%;
-  font-size: 1rem;
+  font-size: 5rem;
   line-height: 1.2;
   z-index: 100;
 }
