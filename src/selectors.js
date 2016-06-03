@@ -13,22 +13,44 @@ function tileOnBoard(tile) {
   return (typeof tile.x === 'number' && typeof tile.y === 'number');
 }
 
-function listAdjancentPositions(x, y) {
-  let positions = [
-    {x: x + 1, y: y},
-    {x: x - 1, y: y},
-    {x: x, y: y + 1},
-    {x: x, y: y - 1}
-  ];
-
+function directionalAdjancentPositions(x, y) {
+  let directions = {
+    y: [
+      {x: x, y: y - 1},
+      {x: x, y: y + 1}
+    ]
+  };
   if (x % 2) {
-    positions.push({x: x + 1, y: y + 1});
-    positions.push({x: x - 1, y: y + 1});
+    directions['x'] = [
+      {x: x - 1, y: y},
+      {x: x + 1, y: y + 1}
+    ];
+    directions['z'] = [
+      {x: x - 1, y: y + 1},
+      {x: x + 1, y: y}
+    ];
   } else {
-    positions.push({x: x + 1, y: y - 1});
-    positions.push({x: x - 1, y: y - 1});
+    directions['x'] = [
+      {x: x - 1, y: y - 1},
+      {x: x + 1, y: y}
+    ];
+    directions['z'] = [
+      {x: x - 1, y: y},
+      {x: x + 1, y: y - 1}
+    ]
   }
-  return positions;
+  return directions;
+}
+
+function listAdjancentPositions(x, y) {
+  const directional = directionalAdjancentPositions(x, y);
+  return [].concat(directional['x'], directional['y'], directional['z']);
+}
+
+function tileByPosition(tiles, pos) { // needs optimization
+  return tiles[Object.keys(tiles).find(id =>
+    tiles[id] && (tiles[id].x === pos.x && tiles[id].y === pos.y)
+  )];
 }
 
 export const canDropTile = createSelector(
@@ -45,9 +67,7 @@ export const canDropTile = createSelector(
     let hasColorNeighbor = false;
     let draggedIsNeighbor = false;
     listAdjancentPositions(x, y).forEach(pos => {
-      const neighborTile = tiles[Object.keys(tiles).find(id => {
-        return tiles[id] && (tiles[id].x === pos.x && tiles[id].y === pos.y)
-      })];
+      const neighborTile = tileByPosition(tiles, pos);
       if (!neighborTile) {
         return;
       }
